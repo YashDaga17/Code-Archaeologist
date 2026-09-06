@@ -1,0 +1,19 @@
+# ═══════════════════════════════════════════════════════════════
+# DATABRICKS APPS CONFIGURATION MANIFEST (app.yaml)
+# Code Archaeologist — AI Development Intelligence Command Center
+# ═══════════════════════════════════════════════════════════════
+version: 1
+
+command:
+  - "bash"
+  - "deploy/start.sh"
+
+env:
+  - name: NODE_ENV
+    value: "production"
+  - name: BACKEND_PORT
+    value: "3001"
+  - name: DATABRICKS_MODEL_ENDPOINT
+    value: "system.ai.llama-4-maverick"
+  - name: DATABRICKS_API_MODE
+    value: "auto"

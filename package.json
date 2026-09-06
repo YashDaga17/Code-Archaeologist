@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "start:databricks": "bash deploy/start.sh",
+    "deploy:databricks": "bash deploy/deploy.sh",
+    "build:all": "npm install && npm run build && (cd backend && npm install)"
   },
   "dependencies": {
     "lucide-react": "^1.41.0",

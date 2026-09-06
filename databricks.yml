@@ -1,0 +1,32 @@
+# ═══════════════════════════════════════════════════════════════
+# DATABRICKS ASSET BUNDLE (DAB) CONFIGURATION (databricks.yml)
+# Code Archaeologist — AI Development Intelligence Command Center
+# ═══════════════════════════════════════════════════════════════
+bundle:
+  name: code-archaeologist
+
+variables:
+  model_endpoint:
+    description: "Databricks AI Gateway / Foundation Model Serving endpoint"
+    default: "system.ai.llama-4-maverick"
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-eea12ae6-478c.cloud.databricks.com/
+      root_path: /Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+
+  prod:
+    mode: production
+    workspace:
+      host: https://dbc-eea12ae6-478c.cloud.databricks.com/
+      root_path: /Shared/.bundle/${bundle.name}/${bundle.target}
+
+resources:
+  apps:
+    code_archaeologist:
+      name: code-archaeologist
+      description: "Code Archaeologist — AI Development Intelligence Command Center"
+      source_code_path: ./
