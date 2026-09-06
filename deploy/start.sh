@@ -27,7 +27,11 @@ export NODE_ENV="${NODE_ENV:-production}"
 echo "➤ Node version: $(node -v)"
 echo "➤ Target Ingress Port (\$DATABRICKS_APP_PORT): ${APP_PORT}"
 echo "➤ Internal Backend Port (\$BACKEND_PORT):      ${BACKEND_PORT}"
-echo "➤ Databricks Host:                           ${DATABRICKS_HOST:-'Using backend/.env fallback'}"
+if [ -n "${DATABRICKS_HOST:-}" ]; then
+  echo "➤ Databricks Host:                           configured"
+else
+  echo "➤ Databricks Host:                           using backend/.env fallback"
+fi
 
 # 1. Ensure Dependencies are installed
 if [ ! -d "node_modules" ]; then
@@ -91,7 +95,7 @@ fi
 
 # 6. Boot Next.js Frontend bound to Databricks App Port on 0.0.0.0
 echo "➤ Launching Next.js Production Server on 0.0.0.0:${APP_PORT}..."
-npx next start -p "${APP_PORT}" -H 0.0.0.0 &
+./node_modules/.bin/next start -p "${APP_PORT}" -H 0.0.0.0 &
 FRONTEND_PID=$!
 
 echo ""
