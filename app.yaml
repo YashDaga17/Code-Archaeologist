@@ -13,7 +13,13 @@ env:
     value: "production"
   - name: BACKEND_PORT
     value: "3001"
+  - name: BACKEND_BIND_HOST
+    value: "127.0.0.1"
   - name: DATABRICKS_MODEL_ENDPOINT
     value: "system.ai.llama-4-maverick"
   - name: DATABRICKS_API_MODE
     value: "auto"
+  - name: CODE_ARCHAEOLOGIST_ALLOW_EXTERNAL_PROMPT_CONTEXT
+    value: "false"
+  - name: NEXT_TELEMETRY_DISABLED
+    value: "1"

@@ -5,12 +5,21 @@
 set -e
 
 APP_NAME="code-archaeologist"
+REQUIRED_BRANCH="${CODE_ARCHAEOLOGIST_DEPLOY_BRANCH:-master}"
 if [ -z "${DATABRICKS_HOST:-}" ]; then
   echo "Error: set DATABRICKS_HOST to your Databricks workspace URL before deploying."
   exit 1
 fi
 WORKSPACE_HOST="${DATABRICKS_HOST}"
 MASKED_WORKSPACE_HOST="$(printf '%s' "${WORKSPACE_HOST}" | sed -E 's#^(https?://)([^./]+).*#\1\2...#')"
+CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+UPSTREAM_BRANCH="$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null || true)"
+
+if [ -n "$CURRENT_BRANCH" ] && [ "$CURRENT_BRANCH" != "$REQUIRED_BRANCH" ]; then
+  echo "Error: refusing to deploy branch '${CURRENT_BRANCH}'. Databricks Apps is configured for '${REQUIRED_BRANCH}'."
+  echo "Switch to '${REQUIRED_BRANCH}' or set CODE_ARCHAEOLOGIST_DEPLOY_BRANCH to the intended branch."
+  exit 1
+fi
 
 echo ""
 echo "  ╔════════════════════════════════════════════════════════════╗"
@@ -19,6 +28,11 @@ echo "  ║   ⛏  DEPLOYING CODE ARCHAEOLOGIST TO DATABRICKS APPS       ║"
 echo "  ║   Target Workspace: ${MASKED_WORKSPACE_HOST} ║"
 echo "  ║                                                            ║"
 echo "  ╚════════════════════════════════════════════════════════════╝"
+echo ""
+echo "➤ Source branch: ${CURRENT_BRANCH:-unknown}"
+if [ -n "$UPSTREAM_BRANCH" ]; then
+  echo "➤ Upstream branch: ${UPSTREAM_BRANCH}"
+fi
 echo ""
 
 # 1. Check Databricks CLI
