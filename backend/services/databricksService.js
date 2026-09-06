@@ -132,6 +132,10 @@ Return ONLY the JSON object matching the schema.`;
 }
 
 function buildFallbackAnalysis(metadata, transcript) {
+  if (metadata?.curated_analysis) {
+    return metadata.curated_analysis;
+  }
+
   const files = metadata?.files_touched || metadata?.files || [];
   const message = metadata?.message || metadata?.summary || '';
   const sessions = metadata?.sessions || [];
