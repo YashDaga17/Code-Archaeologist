@@ -3,7 +3,7 @@
   "checkpoint_id": "01M1TXSCHPV9QVK8BH930AJBD4",
   "strategy": "manual-commit",
   "branch": "master",
-  "checkpoints_count": 1,
+  "checkpoints_count": 2,
   "files_touched": [
     ".gitignore",
     "AGENTS.md",
@@ -11,6 +11,7 @@
     "backend/index.js",
     "backend/services/databricksService.js",
     "backend/services/entireService.js",
+    "backend/services/security.js",
     "src/app/DashboardClient.js",
     "src/app/globals.css",
     "src/app/page.js"
@@ -22,13 +23,20 @@
       "compact_transcript": "/0/transcript.jsonl",
       "content_hash": "/0/content_hash.txt",
       "prompt": "/0/prompt.txt"
+    },
+    {
+      "metadata": "/1/metadata.json",
+      "transcript": "/1/full.jsonl",
+      "compact_transcript": "/1/transcript.jsonl",
+      "content_hash": "/1/content_hash.txt",
+      "prompt": "/1/prompt.txt"
     }
   ],
   "token_usage": {
-    "input_tokens": 112038,
+    "input_tokens": 281406,
     "cache_creation_tokens": 0,
-    "cache_read_tokens": 1718912,
-    "output_tokens": 21261,
-    "api_call_count": 23
+    "cache_read_tokens": 5078016,
+    "output_tokens": 53135,
+    "api_call_count": 56
   }
 }

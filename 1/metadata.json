@@ -1,0 +1,76 @@
+{
+  "cli_version": "0.10.5",
+  "checkpoint_id": "01M1TXSCHPV9QVK8BH930AJBD4",
+  "session_id": "01a07593-8472-7482-bf72-caf1361a1495",
+  "strategy": "manual-commit",
+  "created_at": "2026-09-06T08:36:35.549082Z",
+  "branch": "master",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "backend/services/databricksService.js",
+    "backend/services/security.js"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.5",
+  "turn_id": "8675e34c65ee",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 169368,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 3359104,
+    "output_tokens": 31874,
+    "api_call_count": 33
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-09-06T08:36:35.409232Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 1077,
+    "human_removed": 649,
+    "total_committed": 0,
+    "total_lines_changed": 3256,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 3884,
+      "user_lines_removed": 1572,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".gitignore": 1,
+        "AGENTS.md": 7,
+        "CLAUDE.md": 4,
+        "DATABRICKS_APPS_DEPLOYMENT.md": 224,
+        "DATABRICKS_INTEGRATION.md": 13,
+        "README.md": 23,
+        "app.yaml": 19,
+        "backend/data/lakehouse/checkpoints_delta.jsonl": 2,
+        "backend/index.js": 77,
+        "backend/services/databricksService.js": 816,
+        "backend/services/entireService.js": 189,
+        "databricks.yml": 32,
+        "deploy/deploy.sh": 71,
+        "deploy/start.sh": 103,
+        "next.config.mjs": 3,
+        "package.json": 4,
+        "src/app/DashboardClient.js": 1293,
+        "src/app/globals.css": 1000,
+        "src/app/page.js": 3
+      },
+      "user_removed_per_file": {
+        "README.md": 1,
+        "backend/index.js": 17,
+        "backend/services/databricksService.js": 48,
+        "backend/services/entireService.js": 86,
+        "next.config.mjs": 1,
+        "package.json": 1,
+        "src/app/globals.css": 492,
+        "src/app/page.js": 926
+      }
+    }
+  ]
+}

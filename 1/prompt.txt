@@ -1,0 +1,26 @@
+Act as a senior application security engineer. Perform a security review and testing of the existing Code Archaeologist application without breaking working functionality.
+
+Focus especially on:
+- API authentication and authorization
+- Secrets and environment variable exposure
+- Databricks credential security
+- Input validation and sanitization
+- XSS, injection, SSRF, and insecure API endpoints
+- Sensitive Entire Checkpoint data handling
+- Privacy boundary enforcement
+- Ensuring raw prompts/transcripts never leak to external services
+- Logging and error-message data leaks
+- Dependency vulnerabilities
+
+Test realistic attack paths and review the actual codebase. Fix critical and high-severity issues you find.
+
+Do not fabricate vulnerabilities or claim security features are implemented unless verified.
+
+After completion, provide a concise Security Report with:
+1. Vulnerabilities found
+2. Severity
+3. Fixes applied
+4. Tests performed
+5. Remaining risks
+
+Prioritize secure-by-default architecture while preserving all existing Entire, Databricks, and privacy-boundary functionality.
