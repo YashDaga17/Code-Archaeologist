@@ -1,0 +1,33 @@
+We are building Code Archaeologist.
+
+Inspect the existing repository and implement the initial Mission Control frontend.
+
+Follow the existing project README and architecture.
+
+Build a working first version of the dashboard, but do not implement fake Entire or Databricks integrations.
+
+Keep the code modular and production-quality.
+
+---
+
+We are building Code Archaeologist.
+
+Inspect the existing repository and implement the initial Mission Control frontend.
+
+Follow the existing project README and architecture.
+
+Build a working first version of the dashboard, but do not implement fake Entire or Databricks integrations.
+
+Keep the code modular and production-quality.
+
+---
+
+We are building Code Archaeologist.
+
+Inspect the existing repository and implement the initial Mission Control frontend.
+
+Follow the existing project README and architecture.
+
+Build a working first version of the dashboard, but do not implement fake Entire or Databricks integrations.
+
+Keep the code modular and production-quality.

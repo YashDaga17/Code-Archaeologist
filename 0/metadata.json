@@ -1,0 +1,64 @@
+{
+  "cli_version": "0.10.5",
+  "checkpoint_id": "01M1TKD2E97T4F5PHJKWZR70GQ",
+  "session_id": "39044f9e-e915-455e-81b5-65a979c90c69",
+  "strategy": "manual-commit",
+  "created_at": "2026-09-06T05:35:04.412962Z",
+  "branch": "master",
+  "checkpoints_count": 3,
+  "save_step_count": 3,
+  "files_touched": [
+    "README.md",
+    "src/components/layout/Header.js",
+    "src/components/layout/PipelineBar.js",
+    "src/components/ui/ServicePill.js"
+  ],
+  "agent": "Gemini CLI",
+  "model": "gemini-3-flash-preview",
+  "turn_id": "3cfd4fb6f397",
+  "compact_transcript_start": 0,
+  "session_metrics": {
+    "turn_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-09-06T05:35:04.374547Z",
+    "agent_lines": 75,
+    "agent_removed": 0,
+    "human_added": 3222,
+    "human_modified": 66,
+    "human_removed": 0,
+    "total_committed": 3298,
+    "total_lines_changed": 4116,
+    "agent_percentage": 1.8221574344023324,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 103,
+      "user_lines_removed": 1,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        "README.md": 103
+      },
+      "user_removed_per_file": {
+        "README.md": 1
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 179,
+      "agent_lines_removed": 1
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 179,
+      "agent_lines_removed": 1
+    }
+  ]
+}
