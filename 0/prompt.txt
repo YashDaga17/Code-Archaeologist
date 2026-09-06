@@ -1,0 +1,58 @@
+Act as a senior application security engineer. Perform a security review and testing of the existing Code Archaeologist application without breaking working functionality.
+
+Focus especially on:
+- API authentication and authorization
+- Secrets and environment variable exposure
+- Databricks credential security
+- Input validation and sanitization
+- XSS, injection, SSRF, and insecure API endpoints
+- Sensitive Entire Checkpoint data handling
+- Privacy boundary enforcement
+- Ensuring raw prompts/transcripts never leak to external services
+- Logging and error-message data leaks
+- Dependency vulnerabilities
+
+Test realistic attack paths and review the actual codebase. Fix critical and high-severity issues you find.
+
+Do not fabricate vulnerabilities or claim security features are implemented unless verified.
+
+After completion, provide a concise Security Report with:
+1. Vulnerabilities found
+2. Severity
+3. Fixes applied
+4. Tests performed
+5. Remaining risks
+
+Prioritize secure-by-default architecture while preserving all existing Entire, Databricks, and privacy-boundary functionality.
+
+---
+
+BULDATHON.md outline
+# Project name
+## One-sentence summary
+## Problem, intended user and why it matters
+## Selected Entire track and why Entire is essential
+## Architecture and main workflow
+## Entire Graph findings and verification
+## Noon Curveball: what changed and how we adapted
+## Checkpoint links and what each checkpoint proves
+## Setup, run and test instructions
+## Databricks use, data sources and limitations (if applicable)
+## Known limitations and next steps
+
+
+Can you make this file for the submission
+
+---
+
+Final demo readiness
+State the user and problem in one sentence.
+Show the working product and the critical path, rather than a slide-only walkthrough.
+Explain why Entire is essential to the solution.
+Show one useful checkpoint and one graph finding that changed or verified a decision.
+Explain the Noon Curveball, the behavior that changed and the test that proves it.
+If opting into Databricks, show the essential Databricks function and the evidence that it is working.
+Close with known limitations and the next step toward production readiness.
+
+
+Can you create a final_demo.md file which will have this context about the project
