@@ -1,0 +1,39 @@
+{
+  "cli_version": "0.10.5",
+  "checkpoint_id": "01M1TXZF4G0576AS9H8C135W19",
+  "session_id": "01a0757a-a306-7b31-be2a-20fa2360dbaf",
+  "strategy": "manual-commit",
+  "created_at": "2026-09-06T08:39:53.685328Z",
+  "branch": "master",
+  "checkpoints_count": 1,
+  "save_step_count": 1,
+  "files_touched": [
+    "backend/services/databricksService.js"
+  ],
+  "agent": "Codex",
+  "model": "gpt-5.5",
+  "turn_id": "dfdf93a4c894",
+  "compact_transcript_start": 0,
+  "token_usage": {
+    "input_tokens": 112038,
+    "cache_creation_tokens": 0,
+    "cache_read_tokens": 1718912,
+    "output_tokens": 21261,
+    "api_call_count": 23
+  },
+  "session_metrics": {
+    "turn_count": 1
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-09-06T08:39:53.537931Z",
+    "agent_lines": 1,
+    "agent_removed": 1,
+    "human_added": 3514,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 3515,
+    "total_lines_changed": 5028,
+    "agent_percentage": 0.03977724741447892,
+    "metric_version": 2
+  }
+}
