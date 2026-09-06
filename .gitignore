@@ -58,6 +58,8 @@ id_ed25519*
 *.db
 *.sql.gz
 *.dump
+/backend/data/lakehouse/*.jsonl
+!/backend/data/lakehouse/.gitkeep
 
 # Logs & Debugging
 npm-debug.log*

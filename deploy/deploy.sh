@@ -5,13 +5,18 @@
 set -e
 
 APP_NAME="code-archaeologist"
-WORKSPACE_HOST="${DATABRICKS_HOST:-https://dbc-eea12ae6-478c.cloud.databricks.com/}"
+if [ -z "${DATABRICKS_HOST:-}" ]; then
+  echo "Error: set DATABRICKS_HOST to your Databricks workspace URL before deploying."
+  exit 1
+fi
+WORKSPACE_HOST="${DATABRICKS_HOST}"
+MASKED_WORKSPACE_HOST="$(printf '%s' "${WORKSPACE_HOST}" | sed -E 's#^(https?://)([^./]+).*#\1\2...#')"
 
 echo ""
 echo "  ╔════════════════════════════════════════════════════════════╗"
 echo "  ║                                                            ║"
 echo "  ║   ⛏  DEPLOYING CODE ARCHAEOLOGIST TO DATABRICKS APPS       ║"
-echo "  ║   Target Workspace: ${WORKSPACE_HOST} ║"
+echo "  ║   Target Workspace: ${MASKED_WORKSPACE_HOST} ║"
 echo "  ║                                                            ║"
 echo "  ╚════════════════════════════════════════════════════════════╝"
 echo ""
@@ -26,7 +31,7 @@ if ! command -v databricks &> /dev/null; then
   echo "  • Windows:           winget install Databricks.DatabricksCLI"
   echo ""
   echo "Alternatively, you can deploy in 2 clicks via the Databricks Workspace UI:"
-  echo "  1. Open ${WORKSPACE_HOST}"
+  echo "  1. Open your configured Databricks workspace"
   echo "  2. Go to Compute > Apps > 'Create App'"
   echo "  3. Select your Git folder and click 'Deploy'"
   echo "  (See DATABRICKS_APPS_DEPLOYMENT.md for complete step-by-step UI instructions)"
@@ -38,7 +43,7 @@ echo "✓ Databricks CLI found: $(databricks version)"
 # 2. Check Authentication
 echo "➤ Checking Databricks authentication..."
 if ! databricks auth describe &> /dev/null; then
-  echo "⚠ Not authenticated. Initiating Databricks login for ${WORKSPACE_HOST}..."
+  echo "⚠ Not authenticated. Initiating Databricks login for configured workspace..."
   databricks auth login --host "${WORKSPACE_HOST}"
 fi
 
@@ -67,5 +72,5 @@ databricks apps get "${APP_NAME}"
 echo ""
 echo "═══════════════════════════════════════════════════════════════"
 echo "🎉 Deployment initiated! Your app will be live shortly."
-echo "View in browser at: ${WORKSPACE_HOST}#apps/${APP_NAME}"
+echo "View the deployed app from the Databricks Apps page for ${APP_NAME}."
 echo "═══════════════════════════════════════════════════════════════"

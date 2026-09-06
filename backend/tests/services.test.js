@@ -41,8 +41,8 @@ describe('Code Archaeologist Core Services', () => {
     assert.equal(handoff.original_intent, 'Build high-security developer intelligence command center');
     assert.ok(Array.isArray(handoff.completed_work));
     assert.ok(Array.isArray(handoff.unfinished_work));
-    assert.ok(Array.isArray(handoff.verification_evidence));
-    assert.equal(handoff.verification_evidence[0].status, 'VERIFIED');
+    assert.ok(Array.isArray(handoff.verified_evidence));
+    assert.equal(handoff.verified_evidence[0].status, 'VERIFIED');
   });
 
   it('should generate a markdown Intelligence Report', () => {
@@ -61,11 +61,11 @@ describe('Code Archaeologist Core Services', () => {
     });
 
     assert.ok(typeof report === 'string');
-    assert.match(report, /# Code Archaeologist — Developer Intelligence Report/);
+    assert.match(report, /# Code Archaeologist Intelligence Report/);
     assert.match(report, /test-cp/);
   });
 
-  it('should generate an Agent Resumption Prompt directive', async () => {
+  it('should generate a local Agent Resumption Prompt directive by default', async () => {
     const mockAnalysis = {
       original_intent: 'Implement feature X',
       completed_work: ['Base structure'],
@@ -74,8 +74,10 @@ describe('Code Archaeologist Core Services', () => {
 
     const advisor = await getAgentResumePrompt(mockAnalysis, [], 'test-cp');
     assert.ok(typeof advisor === 'object');
-    assert.ok('prompt' in advisor);
-    assert.match(advisor.prompt, /AGENT RESUME INSTRUCTION DIRECTIVE/);
+    assert.equal(advisor.source, 'local-fallback');
+    assert.ok('advisor_prompt' in advisor);
+    assert.match(advisor.advisor_prompt, /Agent Resume Directive/);
+    assert.match(advisor.reason, /privacy boundary/);
   });
 
   it('should verify Entire CLI and Graph service inquiries', () => {

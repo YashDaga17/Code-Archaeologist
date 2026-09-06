@@ -70,7 +70,7 @@ entire session list --json
     "model": "gemini-3-flash-preview",
     "status": "ended",
     "branch": "master",
-    "worktree_path": "/Users/yashdaga/Desktop/dev/Code-Archaeologist",
+    "worktree_path": "/path/to/Code-Archaeologist",
     "turns": 3,
     "checkpoints": 3,
     "last_prompt": "We are building Code Archaeologist. Inspect the existing repository...",

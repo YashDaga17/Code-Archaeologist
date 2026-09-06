@@ -68,6 +68,13 @@ app.use((req, res, next) => {
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   next();
 });
+app.use((req, res, next) => {
+  const origin = req.get('origin');
+  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+    return sendJson(res.status(403), { success: false, error: 'Origin is not allowed' });
+  }
+  next();
+});
 app.use(cors({
   origin(origin, callback) {
     callback(null, !origin || ALLOWED_ORIGINS.has(origin));
@@ -193,7 +200,7 @@ app.get('/api/health', route((req, res) => {
       entire: {
         status: entireStatus.enabled ? 'online' : 'offline',
         version: entireStatus.version,
-        details: entireStatus.output
+        details: entireStatus.enabled ? 'Entire CLI available' : 'Entire CLI unavailable'
       },
       graph: {
         status: graphStatus.available ? 'online' : 'offline',

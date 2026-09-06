@@ -8,7 +8,7 @@
 // 3. Unsafe / debug configurations (debugger;, disabled TLS)
 // ═══════════════════════════════════════════════════════════════
 
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
@@ -26,6 +26,7 @@ const BLOCKED_FILE_PATTERNS = [
   /\.(?:pem|key|pkcs12|pfx|p12)$/i,
   /(?:service-account|gcp-credentials|aws-credentials).*\.json$/i,
   /\.(?:sqlite|sqlite3|dump)$/i,
+  /^backend\/data\/lakehouse\/.*\.jsonl$/i,
 ];
 
 // ── 2. Hardcoded Secret Patterns ──
@@ -109,19 +110,33 @@ function isExemptFile(filePath) {
   return false;
 }
 
+function runGit(args, options = {}) {
+  return execFileSync('git', args, {
+    encoding: 'utf8',
+    maxBuffer: 10 * 1024 * 1024,
+    ...options,
+  });
+}
+
+function redactSnippet(line, rule) {
+  if (!line) return '';
+  const redacted = rule?.regex ? line.replace(rule.regex, '[REDACTED_SECRET]') : line;
+  return redacted.replace(/(["'=:\s])[^"'=\s]{20,}/g, '$1[REDACTED_VALUE]').substring(0, 100);
+}
+
 function getFilesToScan() {
   try {
     if (isStagedOnly) {
-      const output = execSync('git diff --cached --name-only --diff-filter=ACM', { encoding: 'utf8' }).trim();
+      const output = runGit(['diff', '--cached', '--name-only', '--diff-filter=ACM']).trim();
       return output ? output.split('\n').filter(Boolean) : [];
     } else if (isAllTracked) {
-      const output = execSync('git ls-files', { encoding: 'utf8' }).trim();
+      const output = runGit(['ls-files']).trim();
       return output ? output.split('\n').filter(Boolean) : [];
     } else {
       // Default: inspect staged files if any exist, otherwise inspect uncommitted files
-      const staged = execSync('git diff --cached --name-only --diff-filter=ACM', { encoding: 'utf8' }).trim();
+      const staged = runGit(['diff', '--cached', '--name-only', '--diff-filter=ACM']).trim();
       if (staged) return staged.split('\n').filter(Boolean);
-      const modified = execSync('git diff --name-only --diff-filter=ACM', { encoding: 'utf8' }).trim();
+      const modified = runGit(['diff', '--name-only', '--diff-filter=ACM']).trim();
       return modified ? modified.split('\n').filter(Boolean) : [];
     }
   } catch (err) {
@@ -134,7 +149,7 @@ function getFileContent(filePath) {
   try {
     if (isStagedOnly) {
       // Read staged blob from git index
-      return execSync(`git show :${filePath}`, { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
+      return runGit(['show', `:${filePath}`]);
     }
     return fs.readFileSync(filePath, 'utf8');
   } catch {
@@ -195,7 +210,7 @@ export function runSecurityScan() {
             line: lineNum,
             rule: rule.id,
             description: rule.name,
-            snippet: line.trim().substring(0, 100),
+            snippet: redactSnippet(line.trim(), rule),
             remediation: 'Replace hardcoded credential with process.env variable. If this is a false alarm, add "// code-archaeologist:ignore-secret" on this line.'
           });
         }
@@ -213,7 +228,7 @@ export function runSecurityScan() {
             line: lineNum,
             rule: rule.id,
             description: rule.name,
-            snippet: line.trim().substring(0, 100),
+            snippet: redactSnippet(line.trim(), rule),
             remediation: 'Remove debug / unsafe flag before committing to production repository.'
           });
         }

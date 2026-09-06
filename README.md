@@ -14,7 +14,8 @@
 
 [![Entire CLI](https://img.shields.io/badge/Entire_CLI-v0.10.5-00e5ff?style=for-the-badge&logo=terminal)](https://entire.io)
 [![Entire Graph](https://img.shields.io/badge/Entire_Graph-v0.4.0-00ff88?style=for-the-badge&logo=git)](https://entire.io)
-[![Databricks](https://img.shields.io/badge/Databricks-Llama_3.3_70B-FF3621?style=for-the-badge&logo=databricks)](https://databricks.com)
+[![Databricks](https://img.shields.io/badge/Databricks-Llama_4_Maverick-FF3621?style=for-the-badge&logo=databricks)](https://databricks.com)
+[![Databricks Apps](https://img.shields.io/badge/Databricks_Apps-Ready-FF3621?style=for-the-badge&logo=databricks)](DATABRICKS_APPS_DEPLOYMENT.md)
 [![Next.js](https://img.shields.io/badge/Next.js-v16.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
 [![License](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](LICENSE)
 
@@ -83,8 +84,8 @@ Modern software engineering is increasingly driven by autonomous AI coding agent
 | **Entire Graph** | **Deterministic Verification Layer** | Queries local AST code graph using `entire graph search` and `entire graph impact` to verify or contradict claims with exact file paths, line numbers, and caller/callee relations. |
 
 > 📚 **Deep Dive Documentation**:
-> - [Entire Platform Integration Guide](file:///Users/yashdaga/Desktop/dev/Code-Archaeologist/ENTIRE_INTEGRATION.md)
-> - [Databricks Foundation Model Integration Guide](file:///Users/yashdaga/Desktop/dev/Code-Archaeologist/DATABRICKS_INTEGRATION.md)
+> - [Entire Platform Integration Guide](ENTIRE_INTEGRATION.md)
+> - [Databricks Foundation Model Integration Guide](DATABRICKS_INTEGRATION.md)
 
 ---
 
@@ -222,8 +223,29 @@ npm run dev
 ```
 
 Visit **http://localhost:3000** to access the Mission Control Command Center.
+Or run both in Databricks Apps container mode locally:
+```bash
+npm run start:databricks
+```
 
 ---
+
+## 🚀 Hosting on Databricks Apps
+
+Code Archaeologist is fully packaged for production hosting on **Databricks Apps**:
+
+### Option A: 2-Click Web Deployment (No CLI Required)
+1. In your Databricks Workspace, import this repository into **Workspace > Git Folders**.
+2. Navigate to **Compute > Apps** and click **Create App**.
+3. Select your Git folder, set environment variables (`DATABRICKS_MODEL_ENDPOINT=system.ai.llama-4-maverick`), and click **Deploy**!
+
+### Option B: Automated CLI Deployment
+```bash
+# Automated CLI deployment with DABs
+npm run deploy:databricks
+```
+
+👉 **Complete Step-by-Step Guide**: Read [DATABRICKS_APPS_DEPLOYMENT.md](DATABRICKS_APPS_DEPLOYMENT.md) for full instructions on Service Principal permissions, secret scopes, and Unity Catalog Delta table auditing.
 
 ## 📡 REST API Reference
 

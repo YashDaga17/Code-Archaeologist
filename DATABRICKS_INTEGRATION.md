@@ -41,7 +41,7 @@ The backend connects to Databricks via standard OpenAI-compatible REST invocatio
 
 ```env
 # backend/.env
-DATABRICKS_HOST=https://dbc-eea12ae6-478c.cloud.databricks.com/
+DATABRICKS_HOST=https://your-workspace.cloud.databricks.com/
 DATABRICKS_TOKEN=dapi********************************
 DATABRICKS_MODEL_ENDPOINT=databricks-meta-llama-3-3-70b-instruct
 ```
@@ -164,3 +164,15 @@ In production enterprise deployments, Code Archaeologist scales across thousands
 - **Delta Lake**: Ingests streaming checkpoints and transcripts into high-performance ACID Delta tables (`dev_intelligence.checkpoints`, `dev_intelligence.transcripts`).
 - **Unity Catalog**: Manages access control, audit logs, and data governance over proprietary development context and agent transcripts.
 - **MLflow**: Tracks prompt engineering versions, LLM evaluation metrics, and latency across foundation model serving endpoints.
+
+---
+
+## 7. Hosting on Databricks Apps
+
+Code Archaeologist is fully packaged and ready to run natively on **Databricks Apps** using the included manifests:
+- `app.yaml`: Root app configuration for Databricks Apps serverless runtime.
+- `databricks.yml`: Databricks Asset Bundle (DAB) declaration.
+- `deploy/start.sh`: Unified process orchestrator (Next.js + Express backend).
+- `deploy/deploy.sh`: One-command automated CLI deployment script.
+
+👉 **Complete deployment guide**: Refer to [DATABRICKS_APPS_DEPLOYMENT.md](DATABRICKS_APPS_DEPLOYMENT.md) for step-by-step UI and CLI instructions.

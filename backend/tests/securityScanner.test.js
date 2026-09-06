@@ -11,9 +11,11 @@ describe('Git Security Gate & Secret Scanner Logic', () => {
     /^\.env$/i,
     /^\.env\.(?!example$|template$|sample$)/i,
     /^backend\/\.env$/i,
+    /^backend\/\.env\.(?!example$|template$|sample$)/i,
     /\.databrickscfg$/i,
     /(?:^|\/)id_(?:rsa|dsa|ecdsa|ed25519)(?:\.pub)?$/i,
     /\.(?:pem|key|pkcs12|pfx|p12)$/i,
+    /^backend\/data\/lakehouse\/.*\.jsonl$/i,
   ];
 
   it('should detect a simulated Databricks Personal Access Token', () => {
@@ -48,6 +50,7 @@ describe('Git Security Gate & Secret Scanner Logic', () => {
       'id_ed25519',
       'cert.key',
       'server.pem',
+      'backend/data/lakehouse/checkpoints_delta.jsonl',
     ];
 
     for (const file of sensitiveFiles) {
