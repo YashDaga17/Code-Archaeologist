@@ -25,6 +25,7 @@ export BACKEND_PORT="${BACKEND_PORT:-3001}"
 export BACKEND_BIND_HOST="${BACKEND_BIND_HOST:-127.0.0.1}"
 export NODE_ENV="${NODE_ENV:-production}"
 export NEXT_TELEMETRY_DISABLED="${NEXT_TELEMETRY_DISABLED:-1}"
+START_SCRIPT_VERSION="databricks-apps-no-npx-v2"
 
 run_next() {
   if [ -x "./node_modules/.bin/next" ]; then
@@ -41,7 +42,22 @@ run_next() {
   return 127
 }
 
+next_cli_label() {
+  if [ -x "./node_modules/.bin/next" ]; then
+    echo "./node_modules/.bin/next"
+    return 0
+  fi
+
+  if [ -f "./node_modules/next/dist/bin/next" ]; then
+    echo "node ./node_modules/next/dist/bin/next"
+    return 0
+  fi
+
+  echo "missing"
+}
+
 echo "➤ Node version: $(node -v)"
+echo "➤ Startup script revision: ${START_SCRIPT_VERSION}"
 echo "➤ Target Ingress Port (\$DATABRICKS_APP_PORT): ${APP_PORT}"
 echo "➤ Internal Backend Port (\$BACKEND_PORT):      ${BACKEND_PORT}"
 if [ -n "${DATABRICKS_HOST:-}" ]; then
@@ -60,6 +76,7 @@ if [ ! -x "./node_modules/.bin/next" ] && [ ! -f "./node_modules/next/dist/bin/n
   echo "Error: Next.js runtime dependency is missing after frontend dependency installation."
   exit 1
 fi
+echo "➤ Next.js CLI: $(next_cli_label)"
 
 if [ ! -d "backend/node_modules" ]; then
   echo "➤ Installing backend dependencies..."

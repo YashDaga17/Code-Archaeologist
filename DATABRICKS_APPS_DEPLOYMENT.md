@@ -44,6 +44,18 @@ flowchart TD
 3. **Foundation Model Access**: Access to `system.ai.llama-4-maverick` (or `databricks-meta-llama-3-3-70b-instruct`).
 4. **Git Repository**: This repository pushed to GitHub or imported into your Databricks Workspace Git Folders.
 
+## ✅ Master Branch Deployment Checklist
+
+Databricks Apps is expected to deploy this project from the `master` branch.
+
+Before redeploying from the Databricks UI:
+1. Commit the deployment files locally: `deploy/start.sh`, `app.yaml`, `deploy/deploy.sh`, and any runtime code changes.
+2. Push the commit to `origin/master`.
+3. In Databricks Git Folders, confirm the selected branch is `master` and pull the latest revision if needed.
+4. Redeploy the App from that Git Folder.
+
+If using the local CLI deployer, `npm run deploy:databricks` now refuses to deploy from a branch other than `master` unless `CODE_ARCHAEOLOGIST_DEPLOY_BRANCH` is set intentionally.
+
 ---
 
 ## 🎯 Deployment Method 1: Databricks Workspace UI (Zero-CLI / Recommended)
@@ -204,6 +216,10 @@ Once deployed, verify the complete pipeline:
 ### Q: The App deployment shows "CrashLoopBackOff" or "Health check failed"
 - **Cause**: Databricks Apps expects HTTP traffic on `0.0.0.0:$DATABRICKS_APP_PORT`. If the server binds only to `localhost` or exits before binding, the ingress health check fails.
 - **Solution**: Our `deploy/start.sh` script boots Express first, polls `http://127.0.0.1:3001/api/health`, and then binds Next.js to `0.0.0.0:$DATABRICKS_APP_PORT`. Check the **Logs** tab in the Databricks Apps UI for build or runtime errors.
+
+### Q: Startup fails with `npx: command not found`
+- **Cause**: Some Databricks Apps runtime images include `npm` and installed package binaries but do not expose `npx` in the startup shell path.
+- **Solution**: `deploy/start.sh` uses the project-local Next.js CLI from `./node_modules/.bin/next`, with a `node ./node_modules/next/dist/bin/next` fallback. Make sure this latest script is committed and pushed to `origin/master` before redeploying from the Databricks UI.
 
 ### Q: Databricks AI shows "Fallback Mode" on the deployed app
 - **Cause**: The app does not have a valid `DATABRICKS_TOKEN` or permission to query `system.ai.llama-4-maverick`.
